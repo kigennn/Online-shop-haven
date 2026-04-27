@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e1e;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: beige;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.search-bar input {
+    padding: 5px;
+    border-radius: 30px;
+    margin-right: 10px;
+    border: none;
+}
+
+.banner {
+    text-align: center;
+    background: beige repeat;
+    padding: 50px;
+}
+
+.h2{
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.banner h1 {
+    margin-bottom: 20px;
+}
+
+.books-grid, .deals-grid, .trending-grid {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.book, .deal, .trend {
+    background:beige;
+    padding: 10px;
+    text-align: center;
+}
+
+.book img, .deal img, .trend img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+}

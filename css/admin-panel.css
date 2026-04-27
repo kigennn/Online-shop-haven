@@ -1,0 +1,317 @@
+.admin-panel-page {
+    background:
+        radial-gradient(circle at top left, rgba(197, 106, 61, 0.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(15, 118, 110, 0.12), transparent 26%),
+        linear-gradient(180deg, #fbf7f1 0%, #efe3d3 100%);
+}
+
+.admin-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.admin-page-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .45rem .85rem;
+    border-radius: 999px;
+    background: rgba(15, 118, 110, 0.1);
+    color: var(--portal-brand);
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.admin-page-header h1 {
+    max-width: 14ch;
+    margin: 0;
+    font-family: "Fraunces", serif;
+    font-size: clamp(2rem, 4vw, 3.1rem);
+    line-height: 1.02;
+}
+
+.admin-page-lead {
+    max-width: 56rem;
+    color: var(--portal-muted);
+    font-size: 1.02rem;
+}
+
+.admin-glass-card {
+    border-radius: 30px;
+    background: rgba(255, 250, 243, 0.86);
+    backdrop-filter: blur(16px);
+}
+
+.admin-summary-card {
+    border-radius: 26px;
+    background: rgba(255, 250, 243, 0.9);
+}
+
+.admin-summary-card .card-body {
+    padding: 1.4rem;
+}
+
+.admin-summary-label {
+    margin-bottom: .55rem;
+    color: var(--portal-muted);
+    font-size: .8rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.admin-summary-card h2 {
+    margin-bottom: .35rem;
+    font-family: "Fraunces", serif;
+    font-size: 2.4rem;
+}
+
+.admin-summary-textual {
+    font-size: 1.45rem !important;
+    line-height: 1.15;
+}
+
+.admin-table {
+    margin-bottom: 0;
+}
+
+.admin-table thead th {
+    border-bottom: 1px solid rgba(32, 49, 52, 0.08);
+    color: var(--portal-muted);
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.admin-table tbody tr > td {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-color: rgba(32, 49, 52, 0.08);
+}
+
+.admin-table tbody tr.activity-row td {
+    background: transparent;
+}
+
+.admin-activity-panel {
+    padding: 1.1rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(32, 49, 52, 0.08);
+}
+
+.admin-subcard,
+.admin-note-box {
+    height: 100%;
+    padding: 1rem 1.05rem;
+    border-radius: 22px;
+    background: rgba(252, 247, 240, 0.92);
+    border: 1px solid rgba(32, 49, 52, 0.08);
+}
+
+.admin-note-box ul {
+    margin-bottom: 0;
+    padding-left: 1.1rem;
+}
+
+.admin-role-pill,
+.admin-status-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .35rem .75rem;
+    border-radius: 999px;
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .04em;
+}
+
+.admin-role-pill.is-admin {
+    color: #fff;
+    background: #203134;
+}
+
+.admin-role-pill.is-staff {
+    color: #203134;
+    background: rgba(197, 106, 61, 0.18);
+}
+
+.admin-role-pill.is-user {
+    color: var(--portal-brand-dark);
+    background: rgba(15, 118, 110, 0.14);
+}
+
+.admin-status-pill.is-success {
+    color: #0a5954;
+    background: rgba(15, 118, 110, 0.14);
+}
+
+.admin-status-pill.is-warning {
+    color: #8b5a2b;
+    background: rgba(197, 106, 61, 0.16);
+}
+
+.admin-status-pill.is-danger {
+    color: #8b3c2c;
+    background: rgba(180, 77, 59, 0.16);
+}
+
+.admin-tools-bar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.2rem;
+}
+
+.admin-tools-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+    min-width: min(100%, 22rem);
+}
+
+.admin-tools-meta div {
+    padding: .85rem .95rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(32, 49, 52, 0.08);
+}
+
+.book-manager-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.book-manager-card .card-body {
+    padding: 1.3rem;
+}
+
+.book-manager-top {
+    display: grid;
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+}
+
+.book-cover {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 22px;
+    border: 1px solid rgba(32, 49, 52, 0.08);
+    box-shadow: 0 14px 26px rgba(32, 49, 52, 0.1);
+}
+
+.book-cover-fallback {
+    display: grid;
+    place-items: center;
+    font-family: "Fraunces", serif;
+    font-size: 2.8rem;
+    color: #fff;
+    background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.22), transparent 30%),
+        linear-gradient(180deg, #c56a3d 0%, #8c4e31 100%);
+}
+
+.book-manager-copy p:last-child {
+    color: var(--portal-muted);
+}
+
+.book-manager-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .75rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(32, 49, 52, 0.08);
+}
+
+.book-manager-metrics div {
+    padding: .85rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.book-manager-metric-label {
+    display: block;
+    margin-bottom: .3rem;
+    color: var(--portal-muted);
+    font-size: .76rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.book-manager-release-label strong {
+    font-size: 1rem;
+}
+
+.book-release-editor {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.book-release-form {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) auto;
+    gap: .75rem;
+    align-items: end;
+    min-width: min(100%, 22rem);
+}
+
+.book-release-form .form-control {
+    min-width: 0;
+}
+
+@media (max-width: 991.98px) {
+    .admin-tools-bar,
+    .book-release-editor {
+        flex-direction: column;
+    }
+
+    .book-manager-top {
+        grid-template-columns: 96px minmax(0, 1fr);
+    }
+
+    .book-manager-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 767.98px) {
+    .admin-page-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-page-header h1 {
+        max-width: none;
+    }
+
+    .book-manager-top {
+        grid-template-columns: 1fr;
+    }
+
+    .book-cover {
+        max-width: 180px;
+    }
+
+    .book-manager-metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-tools-meta,
+    .book-release-form {
+        grid-template-columns: 1fr;
+        min-width: 100%;
+    }
+}

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover curated book genres, interactive previews, and a smoother welcome experience at Online Book Haven.">
+    <title>Online Book Haven</title>
+    <link rel="icon" href="img/fav.png" type="image/icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css?v=20260427-2">
+</head>
+<body class="home-page">
+    <header class="header-main">
+        <a class="brand-lockup" href="index.html" aria-label="Online Book Haven home">
+            <span class="brand-lockup__eyebrow">Online Book Haven</span>
+            <span class="brand-lockup__title">Read beautifully</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="header-main-nav" id="primary-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#genres">Genres</a></li>
+                <li><a href="Lgin.php">Login</a></li>
+                <li><a href="Sign.php">Sign Up</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-main-sm">
+            <a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
+                <img src="img/facebook.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+                <img src="img/instagram.jpg" alt="Instagram">
+            </a>
+        </div>
+    </header>
+
+    <main class="home-hero" id="top">
+        <section class="hero-panel reveal is-visible">
+            <div class="hero-copy">
+                <p class="eyebrow">A warm welcome for every kind of reader</p>
+                <h1>Discover books that fit your taste, studies, and mood.</h1>
+                <p class="hero-text">
+                    From fantasy adventures to focused law reads, Online Book Haven gives visitors a calmer,
+                    friendlier way to browse and quickly reach the books that matter to them.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="button button-primary" href="Sign.php">Create Account</a>
+                    <a class="button button-secondary" href="#genres">Browse Categories</a>
+                </div>
+
+                <div class="hero-highlights">
+                    <article class="highlight-card reveal">
+                        <span class="highlight-label">Curated Shelves</span>
+                        <h3>Start with genres that already make sense.</h3>
+                        <p>Readers can explore organized categories instead of guessing where to begin.</p>
+                    </article>
+                    <article class="highlight-card reveal">
+                        <span class="highlight-label">Easy Start</span>
+                        <h3>Move from landing page to account in minutes.</h3>
+                        <p>Clear actions help new visitors sign up, log in, and continue browsing smoothly.</p>
+                    </article>
+                    <article class="highlight-card reveal">
+                        <span class="highlight-label">Friendly Support</span>
+                        <h3>Reach out whenever you need a hand.</h3>
+                        <p>The homepage keeps help visible so users never feel stuck or lost.</p>
+                    </article>
+                </div>
+
+                <div class="mood-switcher" aria-label="Quick genre previews">
+                    <button class="mood-chip is-active" type="button" data-shelf-trigger="fantasy" aria-pressed="true">Fantasy</button>
+                    <button class="mood-chip" type="button" data-shelf-trigger="fiction" aria-pressed="false">Fiction</button>
+                    <button class="mood-chip" type="button" data-shelf-trigger="law" aria-pressed="false">Criminal Law</button>
+                    <button class="mood-chip" type="button" data-shelf-trigger="discover" aria-pressed="false">Discover More</button>
+                </div>
+            </div>
+
+            <aside class="spotlight-card reveal" aria-live="polite">
+                <p class="spotlight-label">Featured shelf</p>
+                <div class="spotlight-media" id="spotlightMedia">
+                    <span class="spotlight-badge" id="spotlightBadge">Epic worlds</span>
+                </div>
+
+                <div class="spotlight-copy">
+                    <div class="spotlight-kicker">
+                        <span id="spotlightIndex">01</span>
+                        <span id="spotlightTag">Reader favorite</span>
+                    </div>
+
+                    <h2 id="spotlightTitle">Fantasy Escapes</h2>
+                    <p id="spotlightDescription">
+                        Lose yourself in spellbound worlds, bold quests, and unforgettable characters that make long nights feel too short.
+                    </p>
+
+                    <ul class="spotlight-meta">
+                        <li id="spotlightAudience">Ideal for weekend dreamers</li>
+                        <li id="spotlightPace">Immersive and cinematic</li>
+                    </ul>
+
+                    <a class="spotlight-link" href="#genres" id="spotlightLink">Explore fantasy picks</a>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <section class="home-section reveal" id="genres">
+        <div class="section-heading">
+            <p class="section-kicker">Browse shelves</p>
+            <h2>Explore the categories readers are most likely to start with.</h2>
+            <p>
+                Each category gives visitors a quick sense of tone and purpose before they choose where to continue.
+                It keeps the homepage helpful, simple, and easier to trust.
+            </p>
+        </div>
+
+        <div class="genre-grid">
+            <button
+                class="genre-card is-active"
+                type="button"
+                data-shelf-button
+                data-shelf="fantasy"
+                data-title="Fantasy Escapes"
+                data-description="Lose yourself in spellbound worlds, bold quests, and unforgettable characters that make long nights feel too short."
+                data-badge="Epic worlds"
+                data-tag="Reader favorite"
+                data-audience="Ideal for weekend dreamers"
+                data-pace="Immersive and cinematic"
+                data-image="img/Categories/fant.jpg"
+                data-link-label="Explore fantasy picks"
+                aria-pressed="true"
+            >
+                <span class="genre-card__image" style="background-image: url('img/Categories/fant.jpg');"></span>
+                <span class="genre-card__content">
+                    <span class="genre-card__eyebrow">Fantasy</span>
+                    <strong>Escape into vivid adventures</strong>
+                    <span>Magic, quests, and unforgettable characters for immersive reading sessions.</span>
+                </span>
+                <span class="genre-card__action">Preview shelf</span>
+            </button>
+
+            <button
+                class="genre-card"
+                type="button"
+                data-shelf-button
+                data-shelf="fiction"
+                data-title="Modern Fiction Picks"
+                data-description="Follow emotionally rich stories, sharp dialogue, and contemporary voices that stay with you long after the final chapter."
+                data-badge="Character-led stories"
+                data-tag="Fresh voices"
+                data-audience="Ideal for thoughtful readers"
+                data-pace="Balanced and reflective"
+                data-image="img/Categories/fict.jpg"
+                data-link-label="Explore fiction picks"
+                aria-pressed="false"
+            >
+                <span class="genre-card__image" style="background-image: url('img/Categories/fict.jpg');"></span>
+                <span class="genre-card__content">
+                    <span class="genre-card__eyebrow">Fiction</span>
+                    <strong>Discover stories with heart and edge</strong>
+                    <span>Fresh voices, memorable characters, and page-turning emotional momentum.</span>
+                </span>
+                <span class="genre-card__action">Preview shelf</span>
+            </button>
+
+            <button
+                class="genre-card"
+                type="button"
+                data-shelf-button
+                data-shelf="law"
+                data-title="Criminal Law Essentials"
+                data-description="Explore focused legal reads that help students and curious minds break down cases, systems, and real-world legal thinking."
+                data-badge="Study-ready"
+                data-tag="Knowledge shelf"
+                data-audience="Ideal for focused learners"
+                data-pace="Clear and structured"
+                data-image="img/Categories/crim.jpg"
+                data-link-label="Explore law picks"
+                aria-pressed="false"
+            >
+                <span class="genre-card__image" style="background-image: url('img/Categories/crim.jpg');"></span>
+                <span class="genre-card__content">
+                    <span class="genre-card__eyebrow">Criminal Law</span>
+                    <strong>Study with more clarity</strong>
+                    <span>Structured legal reading for students and focused learners who need direction.</span>
+                </span>
+                <span class="genre-card__action">Preview shelf</span>
+            </button>
+
+            <button
+                class="genre-card"
+                type="button"
+                data-shelf-button
+                data-shelf="discover"
+                data-title="Discover Something New"
+                data-description="Use the homepage as a launchpad for surprise finds, hidden gems, and the next category that might become your new favorite."
+                data-badge="Open-ended"
+                data-tag="Explorer mode"
+                data-audience="Ideal for curious browsers"
+                data-pace="Flexible and playful"
+                data-image="img/Categories/find.jpg"
+                data-link-label="Explore more categories"
+                aria-pressed="false"
+            >
+                <span class="genre-card__image" style="background-image: url('img/Categories/find.jpg');"></span>
+                <span class="genre-card__content">
+                    <span class="genre-card__eyebrow">Discover More</span>
+                    <strong>Browse beyond your usual shelf</strong>
+                    <span>Perfect for visitors who want something fresh, surprising, and easy to explore.</span>
+                </span>
+                <span class="genre-card__action">Preview shelf</span>
+            </button>
+        </div>
+    </section>
+
+    <section class="home-section experience-strip reveal" id="journey">
+        <div class="section-heading narrow">
+            <p class="section-kicker">Why it feels better</p>
+            <h2>A homepage that feels cleaner, clearer, and more useful.</h2>
+        </div>
+
+        <div class="journey-grid">
+            <article class="journey-card">
+                <span class="journey-step">01</span>
+                <h3>It gives users a simple first step</h3>
+                <p>New visitors can scan the main categories quickly and understand where each shelf will take them.</p>
+            </article>
+
+            <article class="journey-card">
+                <span class="journey-step">02</span>
+                <h3>It looks active instead of static</h3>
+                <p>The featured spotlight updates with each category so the homepage feels alive and intentional.</p>
+            </article>
+
+            <article class="journey-card">
+                <span class="journey-step">03</span>
+                <h3>It keeps the next action obvious</h3>
+                <p>Clear buttons guide people toward signing up, logging in, or contacting the store without confusion.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="cta-banner reveal">
+        <div>
+            <p class="section-kicker">Ready to begin?</p>
+            <h2>Create your account and start browsing with confidence.</h2>
+        </div>
+        <a class="button button-primary" href="Sign.php">Create Account</a>
+    </section>
+
+    <footer class="footer-main">
+        <div class="footer-main-flex">
+            <div class="footer-column">
+                <p class="footer-title">Online Book Haven</p>
+                <p>A friendlier online space for readers, students, and curious visitors looking for their next book.</p>
+            </div>
+
+            <div class="footer-column">
+                <p class="footer-title">Quick links</p>
+                <a href="index.html">Home</a>
+                <a href="Lgin.php">Login</a>
+                <a href="Sign.php">Sign Up</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+
+            <div class="footer-column">
+                <p class="footer-title">Contact</p>
+                <p>+254 12 345 678</p>
+                <p>onlineshophaven@gmail.com</p>
+                <p>102, Nairobi</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="index.js?v=20260427-2"></script>
+</body>
+</html>

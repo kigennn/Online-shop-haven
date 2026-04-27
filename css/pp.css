@@ -1,0 +1,101 @@
+@import url('https://font.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+html {
+    font-size: 62.5%;
+}
+ 
+body {
+    margin-top: 60px;
+    background-image: url("../img/ba.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100%;
+}
+
+
+/*login*/
+.cone{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.form-box{
+    position: relative;
+    width: 400px;
+    height: 550px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.form-box h2{
+color: #fff;
+text-align: center;
+font-size: 2.4rem;
+}
+.form-box .input-bx{
+    position: relative;
+    margin: 31px 0;
+    width: 310px;
+    border-bottom: 2px solid #fff;
+}
+.form-box .input-bx input{
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0 20px 0 5px;
+    color: #070707;
+    font-size: 1.6rem;
+}
+input::placeholder{
+    color: #8b8686;
+}
+.btn{
+    color: #1e1e1e;
+    background: beige;
+    width: 100%;
+    justify-content: center;
+    height: 50px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    font-size: 1.7rem;
+    cursor: pointer;
+    box-shadow: 3px 0 10px rgb(0, 0, 0, .5 );
+}
+.group{
+    display: flex;
+    justify-content: space-between;
+}
+.group span a{
+    color: #fff;
+    position: relative;
+    top: 10px;
+    text-decoration: none;
+    font-size: 1.0rem;
+}
+.group a:focus{
+    text-decoration: underline;
+}
+.input-bx i{
+    position: absolute;
+    color: #fff;
+    top: 13px;
+    right: 0;
+}
+#result{
+    color: red;
+    font-weight: 600;
+    position: relative;
+    top: 25px;
+}
+
+/*end of sign up*/
+
