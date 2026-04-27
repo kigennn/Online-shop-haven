@@ -76,6 +76,107 @@ function profile_delete_managed_image(?string $path): void
     }
 }
 
+// Image validation uses several detectors because browser uploads can expose different MIME signatures on Windows.
+function profile_normalize_image_extension(string $extension): ?string
+{
+    return match (strtolower(trim($extension))) {
+        'jpg', 'jpeg', 'jfif' => 'jpg',
+        'png' => 'png',
+        'webp' => 'webp',
+        'gif' => 'gif',
+        default => null,
+    };
+}
+
+function profile_extension_from_mime(?string $mimeType): ?string
+{
+    return match (strtolower(trim((string) $mimeType))) {
+        'image/jpeg', 'image/jpg', 'image/pjpeg', 'image/jfif', 'image/pipeg' => 'jpg',
+        'image/png', 'image/x-png' => 'png',
+        'image/webp' => 'webp',
+        'image/gif' => 'gif',
+        default => null,
+    };
+}
+
+function profile_extension_from_image_type(int $imageType): ?string
+{
+    return match ($imageType) {
+        IMAGETYPE_JPEG => 'jpg',
+        IMAGETYPE_PNG => 'png',
+        IMAGETYPE_GIF => 'gif',
+        IMAGETYPE_WEBP => 'webp',
+        default => null,
+    };
+}
+
+function profile_detect_upload_extension(array $uploadedFile): ?string
+{
+    $temporaryPath = (string) ($uploadedFile['tmp_name'] ?? '');
+
+    if ($temporaryPath === '' || !is_file($temporaryPath)) {
+        return null;
+    }
+
+    $imageWasConfirmed = false;
+
+    if (function_exists('exif_imagetype')) {
+        $imageType = @exif_imagetype($temporaryPath);
+
+        if (is_int($imageType)) {
+            $imageWasConfirmed = true;
+            $extension = profile_extension_from_image_type($imageType);
+
+            if ($extension !== null) {
+                return $extension;
+            }
+        }
+    }
+
+    $imageInfo = @getimagesize($temporaryPath);
+
+    if (is_array($imageInfo)) {
+        $imageWasConfirmed = true;
+        $extension = profile_extension_from_mime(isset($imageInfo['mime']) ? (string) $imageInfo['mime'] : null);
+
+        if ($extension !== null) {
+            return $extension;
+        }
+
+        if (isset($imageInfo[2]) && is_int($imageInfo[2])) {
+            $extension = profile_extension_from_image_type($imageInfo[2]);
+
+            if ($extension !== null) {
+                return $extension;
+            }
+        }
+    }
+
+    if (class_exists('finfo')) {
+        $mimeType = (new finfo(FILEINFO_MIME_TYPE))->file($temporaryPath);
+        $extension = profile_extension_from_mime(is_string($mimeType) ? $mimeType : null);
+
+        if ($extension !== null) {
+            return $extension;
+        }
+    }
+
+    if (function_exists('mime_content_type')) {
+        $mimeType = @mime_content_type($temporaryPath);
+        $extension = profile_extension_from_mime(is_string($mimeType) ? $mimeType : null);
+
+        if ($extension !== null) {
+            return $extension;
+        }
+    }
+
+    if ($imageWasConfirmed) {
+        return profile_normalize_image_extension((string) pathinfo((string) ($uploadedFile['name'] ?? ''), PATHINFO_EXTENSION));
+    }
+
+    return null;
+}
+
 $message = null;
 $hasError = false;
 
@@ -116,6 +217,7 @@ $country = (string) ($profileDashboard['country'] ?? '');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['submit_user_details'])) {
+        // Profile details and photo changes are saved together so the hero card refreshes in one pass.
         $username = trim((string) ($_POST['username'] ?? ''));
         $email = trim((string) ($_POST['email'] ?? ''));
         $phoneNumber = trim((string) ($_POST['phone_number'] ?? ''));
@@ -146,15 +248,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $message = 'Profile pictures should be 4 MB or smaller.';
                     $hasError = true;
                 } else {
-                    $mimeType = (new finfo(FILEINFO_MIME_TYPE))->file((string) $uploadedFile['tmp_name']);
-                    $allowedMimeTypes = [
-                        'image/jpeg' => 'jpg',
-                        'image/png' => 'png',
-                        'image/webp' => 'webp',
-                        'image/gif' => 'gif',
-                    ];
+                    $fileExtension = profile_detect_upload_extension($uploadedFile);
 
-                    if (!isset($allowedMimeTypes[$mimeType])) {
+                    if ($fileExtension === null) {
                         $message = 'Please upload a JPG, PNG, WEBP, or GIF profile picture.';
                         $hasError = true;
                     } else {
@@ -164,7 +260,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $message = 'We could not prepare profile photo storage right now.';
                             $hasError = true;
                         } else {
-                            $fileExtension = $allowedMimeTypes[$mimeType];
+                            // Managed filenames let us replace and delete profile photos safely later on.
                             $fileName = 'user-' . $currentUser['uid'] . '-' . bin2hex(random_bytes(8)) . '.' . $fileExtension;
                             $targetPath = $uploadDirectory . DIRECTORY_SEPARATOR . $fileName;
 
@@ -442,8 +538,8 @@ require_once __DIR__ . '/header.php';
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label" for="profile_photo">Profile Picture</label>
-                                    <input class="form-control" id="profile_photo" type="file" name="profile_photo" accept=".jpg,.jpeg,.png,.webp,.gif,image/jpeg,image/png,image/webp,image/gif">
-                                    <div class="form-text">Upload a JPG, PNG, WEBP, or GIF up to 4 MB. This works for users, staff, and admin accounts.</div>
+                                    <input class="form-control" id="profile_photo" type="file" name="profile_photo" accept=".jpg,.jpeg,.jfif,.png,.webp,.gif,image/jpeg,image/png,image/webp,image/gif">
+                                    <div class="form-text">Upload a JPG, JPEG, JFIF, PNG, WEBP, or GIF up to 4 MB. This works for users, staff, and admin accounts.</div>
                                 </div>
                                 <?php if ($profileImage !== ''): ?>
                                     <div class="col-12">

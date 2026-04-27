@@ -12,6 +12,7 @@ if (session_status() === PHP_SESSION_ACTIVE && isset($_SESSION['site_user']) && 
 }
 
 $sessionRole = $sessionUser['role'] ?? null;
+// The shared header adapts the navigation so readers, staff, and admins see the tools they can use.
 $isPrivilegedUser = in_array($sessionRole, ['admin', 'staff'], true);
 $panelLabel = $sessionRole === 'staff' ? 'Staff Panel' : 'Admin Panel';
 ?>

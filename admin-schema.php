@@ -5,6 +5,7 @@ function ensure_admin_schema(mysqli $conn): void
 {
     static $bootstrapped = false;
 
+    // This compatibility layer lets the PHP app self-heal older databases after imports or schema changes.
     if ($bootstrapped) {
         return;
     }
@@ -139,6 +140,7 @@ function ensure_database_programmability(mysqli $conn): void
     $missingFunctions = array_diff($requiredFunctions, $existingFunctions);
     $missingProcedures = array_diff($requiredProcedures, $existingProcedures);
 
+    // Skip expensive rebuilds once the SQL API layer is already present in the target database.
     if ($missingViews === [] && $missingFunctions === [] && $missingProcedures === []) {
         return;
     }
@@ -259,6 +261,7 @@ function ensure_database_programmability(mysqli $conn): void
         $conn->query($statement);
     }
 
+    // These routines act as the stable contract between the UI pages and the bookstore database.
     $routineCreates = [
         "CREATE FUNCTION fn_user_total_spent(p_user_id BIGINT UNSIGNED)
          RETURNS DECIMAL(12,2)

@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+// Centralize parameter binding so page-level code can stay focused on workflow logic.
 function db_bind_and_execute(mysqli_stmt $stmt, string $types, array $params): void
 {
     if ($types !== '' && $params !== []) {
@@ -40,6 +41,7 @@ function db_fetch_one(mysqli $conn, string $sql, string $types = '', array $para
     return $rows[0] ?? null;
 }
 
+// Stored procedures can leave extra result sets open, so we always drain them before the next call.
 function db_flush_results(mysqli $conn): void
 {
     while ($conn->more_results()) {

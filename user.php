@@ -9,10 +9,12 @@ require_once __DIR__ . '/database.php';
 require_once __DIR__ . '/admin-schema.php';
 require_once __DIR__ . '/data-layer.php';
 
+// Keep runtime schema upgrades automatic so older local databases still work with newer pages.
 ensure_admin_schema($conn);
 
 function normalize_session_user(array $user): array
 {
+    // Only persist the fields the UI and access-control layer need in session storage.
     return [
         'uid' => (int) $user['user_id'],
         'username' => $user['username'],
@@ -86,6 +88,7 @@ function password_is_hashed(string $storedPassword): bool
 
 function passwords_match(string $plainPassword, string $storedPassword): bool
 {
+    // Support both hashed passwords and older plain-text seed data while the project transitions.
     if (password_is_hashed($storedPassword)) {
         return password_verify($plainPassword, $storedPassword);
     }
@@ -128,6 +131,7 @@ function redirect_to_role_home(?array $user = null): void
 {
     $user = $user ?? current_user();
     $role = $user['role'] ?? 'user';
+    // Readers land in the storefront, while staff/admin users return to the operations workspace.
     $destination = in_array($role, ['admin', 'staff'], true) ? 'admin.php' : 'shop.php';
 
     header('Location: ' . $destination);

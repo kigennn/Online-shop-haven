@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const navToggle = document.querySelector(".nav-toggle");
     const navLinks = document.querySelectorAll(".header-main-nav a");
 
+    // Mobile navigation is intentionally self-closing so the hero content stays visible after each jump.
     if (header && navToggle) {
         const closeNav = () => {
             header.classList.remove("is-open");
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Smooth-scroll only for on-page anchors that still exist in the current homepage layout.
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         const targetSelector = anchor.getAttribute("href");
 
@@ -70,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let hasUserSelectedShelf = false;
     let rotationTimer = null;
 
+    // One shared updater keeps the spotlight card, shelf pills, and hero artwork in sync.
     const setActiveShelf = (shelfId, fromUser = false) => {
         const activeShelf = shelfButtons.find((button) => button.dataset.shelf === shelfId);
 
@@ -167,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setActiveShelf(shelfButtons[0].dataset.shelf);
     }
 
+    // Auto-rotation stops as soon as the visitor makes a deliberate shelf choice.
     if (!prefersReducedMotion && shelfButtons.length > 1) {
         rotationTimer = window.setInterval(() => {
             if (hasUserSelectedShelf) {
@@ -182,6 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const revealItems = document.querySelectorAll(".reveal");
 
+    // Reveal animations respect reduced-motion settings instead of forcing scroll effects.
     if (prefersReducedMotion) {
         revealItems.forEach((item) => item.classList.add("is-visible"));
     } else {
@@ -205,6 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const spotlightCard = document.querySelector(".spotlight-card");
 
+    // The subtle 3D tilt is decorative only, so it is disabled for reduced-motion users.
     if (!prefersReducedMotion && spotlightCard) {
         spotlightCard.addEventListener("mousemove", (event) => {
             const bounds = spotlightCard.getBoundingClientRect();

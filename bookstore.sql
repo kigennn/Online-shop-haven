@@ -2,6 +2,7 @@ CREATE DATABASE IF NOT EXISTS bookstore;
 
 USE bookstore;
 
+-- Core identity data for shoppers, staff, and admins.
 CREATE TABLE IF NOT EXISTS users (
     user_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL,
@@ -31,6 +32,7 @@ CREATE TABLE IF NOT EXISTS addresses (
     PRIMARY KEY (address_id)
 );
 
+-- Catalog records support both buying and borrowing from the same storefront.
 CREATE TABLE IF NOT EXISTS books (
     book_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,

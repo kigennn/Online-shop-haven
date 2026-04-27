@@ -57,6 +57,7 @@ if (isset($_GET['status'], $statusMessages[$_GET['status']])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Server-side role checks stay here even if the UI already hides buttons for restricted actions.
     $action = $_POST['action'] ?? '';
 
     if ($action === 'save_account') {
@@ -232,6 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $feedbackType = 'danger';
                 } else {
                     try {
+                        // Borrowing updates stock in the same transaction so the catalog never drifts.
                         $conn->begin_transaction();
 
                         $updateStockStmt = $conn->prepare(

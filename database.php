@@ -6,6 +6,7 @@ $databaseUser = 'root';
 $databasePassword = '';
 $databaseName = 'bookstore';
 
+// Reuse the same mysqli handle when multiple includes bootstrap the app in one request.
 if (!isset($conn) || !($conn instanceof mysqli)) {
     $conn = new mysqli($databaseHost, $databaseUser, $databasePassword, $databaseName);
 

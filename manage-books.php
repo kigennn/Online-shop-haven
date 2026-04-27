@@ -11,6 +11,7 @@ $activeNav = 'manage-books';
 $extraStyles = ['css/admin-panel.css?v=20260427-3'];
 $bodyClass = 'portal-shell bg-light admin-panel-page';
 
+// Filter state is normalized up front so redirects and saved actions can round-trip cleanly.
 function normalize_publish_state(string $value): string
 {
     $allowed = ['all', 'dated', 'missing'];
@@ -126,6 +127,7 @@ $returnPublishState = normalize_publish_state((string) ($_POST['return_publish_s
 $returnSort = normalize_book_sort((string) ($_POST['return_sort'] ?? $catalogSort));
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // All catalog mutations funnel through one handler so validation stays consistent between add/edit modes.
     $action = $_POST['action'] ?? '';
     $priceValue = is_numeric($price) ? (float) $price : -1;
     $stockValue = filter_var($stockQuantity, FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]);
@@ -313,6 +315,7 @@ try {
 $allBooks = $books;
 $editingBook = null;
 
+// The side-panel editor reuses the same form fields as add mode, so we hydrate them from the selected title.
 if ($editingBookId > 0) {
     foreach ($allBooks as $bookRow) {
         if ((int) ($bookRow['book_id'] ?? 0) === $editingBookId) {

@@ -10,6 +10,7 @@ $activeNav = 'shop';
 $extraStyles = ['css/shop.css?v=20260427-2'];
 $bodyClass = 'portal-shell shop-page';
 
+// The shop keeps separate buy/borrow buckets so one checkout can create orders and loan records together.
 function get_shop_cart(): array
 {
     $cart = $_SESSION['shop_cart'] ?? ['buy' => [], 'borrow' => []];
@@ -157,6 +158,7 @@ if (isset($_GET['status'], $statusMessages[$_GET['status']])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Cart actions round-trip through POST so stock validation always happens against live catalog data.
     $action = $_POST['action'] ?? '';
     $returnGenre = trim((string) ($_POST['return_genre'] ?? $selectedGenre));
     $returnGenre = $returnGenre === '' ? 'All' : $returnGenre;
@@ -226,6 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 $checkoutResult = db_call_one(
                     $conn,
+                    // Checkout is delegated to SQL so order creation, borrowings, and stock updates stay atomic.
                     'CALL sp_process_checkout(?, ?, ?)',
                     'iss',
                     [
@@ -290,6 +293,7 @@ $catalogBooks = array_values(array_filter(
     }
 ));
 
+// Sorting happens after the procedure call so the storefront can combine DB data with UI-only ranking modes.
 usort(
     $catalogBooks,
     static function (array $left, array $right) use ($selectedSort): int {
