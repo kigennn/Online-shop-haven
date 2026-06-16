@@ -142,4 +142,5 @@ if (isset($_GET['registered'])) {
 
     <script src="js/guest-pages.js?v=20260427-1"></script>
 </body>
+    
 </html>
